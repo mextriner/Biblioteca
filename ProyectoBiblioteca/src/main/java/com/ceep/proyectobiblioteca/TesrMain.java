@@ -44,19 +44,20 @@ public class TesrMain {
         // TODO code application logic here
         
         Date date = new Date(70,4,5);
-        Autor autor = new Autor(1,"Patrick","Rothfuss","EEUU",date);
+        Autor autor = new Autor("Patrick","Rothfuss","EEUU",date);
 //        
 //        
 //        autorDao.actualizar(autor);
 
         Date date1 = new Date(98,6,28);
         Autor autor1 = new Autor("Máximo","Mestriner","España",date1);
- //       autorDao.insertar(autor1);
+        autorDao.insertar(autor1);
+        autorDao.insertar(autor);
  
         //Recorro el List de autores y añado a traves del id los autores en el archivp de texto
 
         for (int i = 1; i <= autores().size(); i++) {
-            ManejoDeArchivos.agregarArchivo("autores.txt","%"+autor(i).toString());
+            ManejoDeArchivos.agregarArchivo("autores.txt",autor(i).escribir());
         }
 
         

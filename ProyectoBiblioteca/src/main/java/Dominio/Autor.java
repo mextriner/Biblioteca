@@ -83,6 +83,10 @@ public class Autor {
         return "Autor{" + "idautor=" + idautor + ", nombre=" + nombre + ", apellido=" + apellido + ", nacionalidad=" + nacionalidad + ", fechaNac=" + fechaNac + '}';
     }
     
+    public String escribir() {
+        return '%' + '*' + idautor + '*' + nombre + '*' + apellido + '*' + nacionalidad + '*' + fechaNac + '*' ;
+    }
+    
     
     
 }

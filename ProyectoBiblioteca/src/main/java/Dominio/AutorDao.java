@@ -32,9 +32,9 @@ public class AutorDao {
             + "apellido = ?,"
             + "nacionalidad = ?,"
             + "fechaNac = ?"
-            + "WHERE idautor = ?";
+            + "WHERE idAutor = ?";
     
-    private static final String SQL_DELETE = "DELETE FROM autor WHERE idautor = ?";
+    private static final String SQL_DELETE = "DELETE FROM autor WHERE idAutor = ?";
     
 //    Método que nos lista todas las personas de nuestro sistema
     public List<Autor> seleccionar() throws SQLException {
@@ -51,7 +51,7 @@ public class AutorDao {
         rs = stmt.executeQuery();
         
         while(rs.next()){
-            int idautor = rs.getInt("idautor");
+            int idautor = rs.getInt("idAutor");
             String nombre = rs.getString("nombre");
             String apellido = rs.getString("apellido");
             String nacionalidad = rs.getString("nacionalidad");

@@ -3,62 +3,59 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package Dominio;
 
-    package Dominio;
-    
-    
-    import static AccesoDatos.Conexion.close;
-    import Dominio.Autor;
-    import static AccesoDatos.Conexion.getConnection;
-    import java.sql.Connection;
-    import java.sql.PreparedStatement;
-    import java.sql.ResultSet;
-    import java.sql.SQLException;
-    import java.sql.Date;
-    import java.util.ArrayList;
-    import java.util.List;
+import static AccesoDatos.Conexion.close;
+import static AccesoDatos.Conexion.getConnection;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Alumno Mañana
  */
-public class AutorDao {
-    private static final String SQL_SELECT ="SELECT * FROM autor";
-    private static final String SQL_INSERT = "INSERT INTO autor (nombre,"
-            + "apellido,nacionalidad, fechaNac) VALUES (?,?,?,?)";
+public class UsuarioDao {
+    private static final String SQL_SELECT ="SELECT * FROM idUsuario";
+    private static final String SQL_INSERT = "INSERT INTO usuario (nombre,"
+            + "apellido,direccion, fechaNac) VALUES (?,?,?,?)";
     
-    private static final String SQL_UPDATE = "UPDATE autor SET "
+    private static final String SQL_UPDATE = "UPDATE usuario SET "
             + "nombre = ?,"
             + "apellido = ?,"
-            + "nacionalidad = ?,"
+            + "direccion = ?,"
             + "fechaNac = ?"
-            + "WHERE idAutor = ?";
+            + "WHERE idUsuario = ?";
     
-    private static final String SQL_DELETE = "DELETE FROM autor WHERE idAutor = ?";
+    private static final String SQL_DELETE = "DELETE FROM usuario WHERE idUsuario = ?";
     
 //    Método que nos lista todas las personas de nuestro sistema
-    public List<Autor> seleccionar() throws SQLException {
+    public List<Usuario> seleccionar() throws SQLException {
         //INICIALIZAR VARIABLES
         
         Connection conn = null;
         PreparedStatement stmt= null;
         ResultSet rs = null;
-        Autor autor = null;
-        List<Autor> autores = new ArrayList<>();
+        Usuario usuario = null;
+        List<Usuario> usuarios = new ArrayList<>();
         
         conn = getConnection();
         stmt = conn.prepareStatement(SQL_SELECT);
         rs = stmt.executeQuery();
         
         while(rs.next()){
-            int idautor = rs.getInt("idAutor");
+            int idusuario = rs.getInt("idUsuario");
             String nombre = rs.getString("nombre");
             String apellido = rs.getString("apellido");
-            String nacionalidad = rs.getString("nacionalidad");
+            String direccion = rs.getString("direccion");
             Date fechaNac = rs.getDate("fechaNac");
             
             //Instancio un nuevo objeto
-            autores.add(new Autor(idautor, nombre,apellido,nacionalidad,fechaNac));
+            usuarios.add(new Usuario(idusuario, nombre,apellido,direccion,fechaNac));
             
         }
         
@@ -67,11 +64,11 @@ public class AutorDao {
         close(stmt);
         close(conn);
         
-        return autores;
+        return usuarios;
     }
     
     //MÉTODO QUE INSERTA UNA PERSONA EN EL SISTEMA
-    public int insertar (Autor autor){
+    public int insertar (Usuario usuario){
         Connection conn =null;
         PreparedStatement stmt=null;
         int registro = 0;
@@ -88,10 +85,10 @@ public class AutorDao {
             
             //3. ASIGNAR LOS VALORES A LOS INTERROGANTES DE LA CONSULTA
             
-            stmt.setString(1, autor.getNombre());
-            stmt.setString(2, autor.getApellido());
-            stmt.setString(3, autor.getNacionalidad());
-            stmt.setDate(4, autor.getFechaNac());
+            stmt.setString(1, usuario.getNombre());
+            stmt.setString(2, usuario.getApellido());
+            stmt.setString(3, usuario.getDireccion());
+            stmt.setDate(4, usuario.getFechaNac());
             
             
             //4. EJECUTO LA QUERY
@@ -114,7 +111,7 @@ public class AutorDao {
         return registro;
     }
     
-    public int actualizar (Autor autor){
+    public int actualizar (Usuario usuario){
         Connection conn =null;
         PreparedStatement stmt=null;
         int registro = 0;
@@ -131,11 +128,11 @@ public class AutorDao {
             
             //3. ASIGNAR LOS VALORES A LOS INTERROGANTES DE LA CONSULTA
             
-            stmt.setString(1, autor.getNombre());
-            stmt.setString(2, autor.getApellido());
-            stmt.setString(3, autor.getNacionalidad());
-            stmt.setDate(4, autor.getFechaNac());
-            stmt.setInt(5, autor.getIdautor());
+            stmt.setString(1, usuario.getNombre());
+            stmt.setString(2, usuario.getApellido());
+            stmt.setString(3, usuario.getDireccion());
+            stmt.setDate(4, usuario.getFechaNac());
+            stmt.setInt(5, usuario.getIdusuario());
             
             
             //4. EJECUTO LA QUERY
@@ -158,7 +155,7 @@ public class AutorDao {
         return registro;
     }
     
-    public int eliminar (Autor autor){
+    public int eliminar (Usuario usuario){
         Connection conn =null;
         PreparedStatement stmt=null;
         int registro = 0;
@@ -175,7 +172,7 @@ public class AutorDao {
             
             //3. ASIGNAR LOS VALORES A LOS INTERROGANTES DE LA CONSULTA
             
-            stmt.setInt(1, autor.getIdautor());
+            stmt.setInt(1, usuario.getIdusuario());
             
             
             //4. EJECUTO LA QUERY

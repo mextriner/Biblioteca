@@ -14,6 +14,7 @@ import java.sql.Date;
 public class Usuario {
     private int idusuario;
     private String nombre;
+    private String clave;
     private String apellido;
     private String direccion;
     private Date fechaNac;

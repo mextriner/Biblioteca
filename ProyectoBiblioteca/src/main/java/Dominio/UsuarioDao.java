@@ -20,6 +20,7 @@ import java.util.List;
  * @author Alumno Mañana
  */
 public class UsuarioDao {
+
     private static final String SQL_SELECT ="SELECT * FROM idUsuario";
     private static final String SQL_INSERT = "INSERT INTO usuario (nombre,"
             + "apellido,direccion, fechaNac) VALUES (?,?,?,?)";

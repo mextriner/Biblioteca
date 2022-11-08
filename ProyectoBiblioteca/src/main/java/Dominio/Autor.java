@@ -6,6 +6,8 @@
 package Dominio;
 
 import java.sql.Date;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -87,6 +89,33 @@ public class Autor {
         return '%' + '*' + idautor + '*' + nombre + '*' + apellido + '*' + nacionalidad + '*' + fechaNac + '*' ;
     }
     
+    
+    public static List <Autor> autores(){
+        AutorDao autorDao = new AutorDao();
+        List <Autor> aut = null;
+        try{
+            List <Autor> a = autorDao.seleccionar();
+            aut = a;
+        }catch(SQLException ex){
+            ex.printStackTrace(System.out);
+        }
+        return aut;
+    }
+    
+    public static Autor autor(int id){
+        Autor nAutor = null;
+        List <Autor> lista = autores();
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getIdautor() == id){
+                nAutor = lista.get(i);
+            }
+        }
+            
+        return nAutor;
+    }
+     
+     
+     
     
     
 }
